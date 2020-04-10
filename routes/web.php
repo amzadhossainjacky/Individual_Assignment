@@ -11,6 +11,14 @@
 |
 */
 
+//landing page route
 Route::get('/', function () {
     return view('main');
 });
+
+//login route
+
+Route::get('/system/login', 'LoginController@index')->name('login');
+
+
+
