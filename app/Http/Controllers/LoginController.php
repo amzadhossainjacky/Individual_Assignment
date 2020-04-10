@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
+use Validator;
 class LoginController extends Controller
 {
     /**
@@ -13,7 +14,6 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
         return view('login.index');
 
     }
@@ -26,6 +26,7 @@ class LoginController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -36,7 +37,52 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validation
+        $validation = Validator::make($request->all(), [
+			'email'=>'required',
+			'password'=>'required'
+        ]);
+
+        if($validation->fails()){
+			return back()
+					->with('errors', $validation->errors())
+					->withInput();
+		}
+
+
+        //database finding
+        $find = User::where('email', $request->email)
+                ->where('password', $request->password)
+                ->first();
+
+         if($find != null){
+
+            if($find->role == "admin"){
+
+                $request->session()->put('uname', $find->name);
+                $request->session()->put('uemail', $find->email);
+                $request->session()->put('uid', $find->id);
+
+                return redirect()->route('admin_home');
+            }
+
+            if($find->role == "manager"){
+                $request->session()->put('uname', $find->name);
+                $request->session()->put('uemail', $find->email);
+                $request->session()->put('uid', $find->id);
+
+                return redirect()->route('manager_home');
+            }
+
+            else{
+                $request->session()->flash('msg', 'invalid username/password');
+                return redirect()->route('login');
+            }
+
+    	}else{
+            $request->session()->flash('msg', 'invalid username/password');
+            return redirect()->route('login');
+    	}
     }
 
     /**

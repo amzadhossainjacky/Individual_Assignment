@@ -46,11 +46,17 @@
 
         {{csrf_field()}}
         <h3>Login</h3>
-        {{-- <p>{{session('msg')}}</p> --}}
+
+        <p>{{session('msg')}}</p>
+
+        @foreach($errors->all() as $err)
+		{{$err}} <br>
+        @endforeach
+
         <label for="email">Email</label><br>
-        <input type="email" name="email"><br>
+        <input type="email" name="email" value="{{old('email')}}"><br>
         <label for="password">Password</label><br>
-        <input type="password" name="password"><br><br>
+        <input type="password" name="password" value="{{old('password')}}"><br><br>
 
         <button type="submit" class="btn">Submit</button>
     </form>
