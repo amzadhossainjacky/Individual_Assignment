@@ -49,7 +49,6 @@ class LoginController extends Controller
 					->withInput();
 		}
 
-
         //database finding
         $find = User::where('email', $request->email)
                 ->where('password', $request->password)
