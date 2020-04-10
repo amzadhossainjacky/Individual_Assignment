@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/system/login', 'LoginController@index')->name('login');
 Route::post('/system/login', 'LoginController@store')->name('login');
+Route::get('/system/logout', 'LogoutController@index')->name('logout');
 
 
 Route::get('/system/admin/home', 'AdminHomeController@index')->name('admin_home');
