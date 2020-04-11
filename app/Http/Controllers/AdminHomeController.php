@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Validator;
 class AdminHomeController extends Controller
 {
     /**
@@ -33,6 +34,7 @@ class AdminHomeController extends Controller
     public function create()
     {
         //
+        return view('admin.addManager');
     }
 
     /**
@@ -44,6 +46,31 @@ class AdminHomeController extends Controller
     public function store(Request $request)
     {
         //
+        $validation = Validator::make($request->all(), [
+
+			'name'=>'required',
+			'email'=>'required|email|unique:users',
+			'password'=>'required|min:4|max:4',
+			'company'=>'required'
+        ]);
+
+        if($validation->fails()){
+			return back()
+					->with('errors', $validation->errors())
+					->withInput();
+        }
+
+        $user = new User();
+
+        $user->name =$request->name;
+        $user->email =$request->email;
+        $user->password =$request->password;
+        $user->company =$request->company;
+        $user->role ="manager";
+        $user->validated = 0;
+        $user->save();
+
+        return redirect()->back();
     }
 
     /**

@@ -13,6 +13,7 @@
     <h1>All User </h1>&nbsp
     <a href="">back</a>
 
+    <a href="{{route('add_manager')}}">Add Manager</a>
     <a href="{{route('logout')}}">Logout</a>
 
 	<table border="1">
