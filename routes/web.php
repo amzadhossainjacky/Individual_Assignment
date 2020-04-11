@@ -40,4 +40,5 @@ Route::post('/system/buses/{id}', 'AddBusesController@update')->name('bus_edit')
 
 //manager
 Route::get('/system/supportstaff/home', 'ManagerHomeController@index')->name('manager_home');
-
+Route::get('/system/supportstaff/addCounter', 'CounterController@index')->name('add_counter');
+Route::post('/system/supportstaff/addCounter', 'CounterController@store')->name('add_counter');

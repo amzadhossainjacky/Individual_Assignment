@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    <a href="{{route('add_counter')}}">add counter</a>
     <a href="{{route('logout')}}">Logout</a>
     <h2>{{session('uname')}} </h2>
 </body>
