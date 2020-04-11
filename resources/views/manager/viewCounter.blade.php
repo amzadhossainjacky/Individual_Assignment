@@ -10,32 +10,32 @@
 
     <h2>{{session('uname')}} </h2>
 
-    <h1>All User </h1>&nbsp
     <a href="">back</a>
-
-    <a href="{{route('add_manager')}}">Add Manager</a>
-    <a href="{{route('add_buses')}}">Add Buses</a>
-    <a href="{{route('view_buses')}}">show Buses</a>
+    <a href="{{route('add_counter')}}">add counter</a>
+    <a href="{{route('view_counter')}}">View counter</a>
     <a href="{{route('logout')}}">Logout</a>
+
+    <h1>Show Counters </h1>
 
 	<table border="1">
 		<tr>
-			<th>ID</th>
-			<th>NAME</th>
+			<th>counter Name</th>
+			<th>Operator</th>
             <th>Email</th>
-            <th>Company</th>
+            <th>Location</th>
 			<th>Action</th>
 		</tr>
 
-		@foreach($all as $user)
+		@foreach($all as $bus)
 		<tr>
 
-			<td>{{$user['id']}}</td>
-			<td>{{$user['name']}}</td>
-			<td>{{$user['email']}}</td>
-			<td>{{$user['company']}}</td>
+			<td>{{$bus['name']}}</td>
+			<td>{{$bus['operator']}}</td>
+			<td>{{$bus['email']}}</td>
+			<td>{{$bus['location']}}</td>
 			<td>
-                <form action="{{route('destroy_manager', $user['id'])}}" method="get">
+
+                <form action="{{route('destroy_counter', $bus['id'])}}" method="get">
                     <button type="submit"> Delete</button>
                 </form>
 

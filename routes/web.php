@@ -42,3 +42,5 @@ Route::post('/system/buses/{id}', 'AddBusesController@update')->name('bus_edit')
 Route::get('/system/supportstaff/home', 'ManagerHomeController@index')->name('manager_home');
 Route::get('/system/supportstaff/addCounter', 'CounterController@index')->name('add_counter');
 Route::post('/system/supportstaff/addCounter', 'CounterController@store')->name('add_counter');
+Route::get('/system/buscounter', 'CounterController@create')->name('view_counter');
+Route::get('/system/counter/{id}', 'CounterController@destroy')->name('destroy_counter');

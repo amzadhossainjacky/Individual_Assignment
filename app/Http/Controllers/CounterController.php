@@ -26,7 +26,11 @@ class CounterController extends Controller
      */
     public function create()
     {
-        //
+        //view counter
+
+        $all = Counter::all();
+
+        return view('manager.viewCounter', compact('all'));
     }
 
     /**
@@ -106,5 +110,10 @@ class CounterController extends Controller
     public function destroy($id)
     {
         //
+
+        $destroy = Counter::destroy($id);
+
+        return redirect()->back();
+
     }
 }
