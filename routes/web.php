@@ -33,8 +33,11 @@ Route::post('/system/supportstaff/add', 'AdminHomeController@store')->name('add_
 
 Route::get('/system/buses/add', 'AddBusesController@index')->name('add_buses');
 Route::post('/system/buses/add', 'AddBusesController@store')->name('add_buses');
+Route::get('/system/buses', 'AddBusesController@create')->name('view_buses');
+Route::get('/system/buses/{id}/edit', 'AddBusesController@edit')->name('bus_edit');
+Route::post('/system/buses/{id}', 'AddBusesController@update')->name('bus_edit');
 
 
-
+//manager
 Route::get('/system/supportstaff/home', 'ManagerHomeController@index')->name('manager_home');
 

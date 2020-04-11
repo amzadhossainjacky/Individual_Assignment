@@ -26,7 +26,10 @@ class AddbusesController extends Controller
      */
     public function create()
     {
-        //
+
+        $all = Bus::all();
+        return view('admin.allBuses', ['all'=>$all]);
+
     }
 
     /**
@@ -74,6 +77,8 @@ class AddbusesController extends Controller
     public function show($id)
     {
         //
+
+
     }
 
     /**
@@ -84,7 +89,9 @@ class AddbusesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $find = Bus::where('id', $id)->first();
+
+        return view('admin.editBuses', compact('find'));
     }
 
     /**
@@ -97,6 +104,31 @@ class AddbusesController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $validation = Validator::make($request->all(), [
+
+			'name'=>'required|unique:buses',
+			'operator'=>'required',
+			'seat_row'=>'required',
+			'seat_column'=>'required',
+			'location'=>'required'
+        ]);
+
+        if($validation->fails()){
+			return back()
+					->with('errors', $validation->errors())
+					->withInput();
+        }
+
+        $bus = Bus::find($id);
+        $bus->name =$request->name;
+        $bus->operator =$request->operator;
+        $bus->seat_row =$request->seat_row;
+        $bus->seat_column =$request->seat_column;
+        $bus->location =$request->location;
+        $bus->save();
+
+        return redirect()->back();
     }
 
     /**
