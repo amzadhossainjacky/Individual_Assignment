@@ -53,6 +53,9 @@ class LoginController extends Controller
                 ->where('password', $request->password)
                 ->first();
 
+        //all user
+
+
          if($find != null){
 
             if($find->role == "admin"){

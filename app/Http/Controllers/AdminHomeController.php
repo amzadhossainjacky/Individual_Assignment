@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\User;
 class AdminHomeController extends Controller
 {
     /**
@@ -14,8 +14,11 @@ class AdminHomeController extends Controller
     public function index(Request $req)
     {
         //
+
+        $all = User::Where('role', 'manager')->get();
+
         if($req->session()->has('uname')){
-			return view('admin.index');
+			return view('admin.index', ['all'=>$all]);
 		}else{
 			return redirect()->route('login');
 		}
