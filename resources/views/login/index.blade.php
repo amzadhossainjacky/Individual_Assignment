@@ -40,7 +40,7 @@
 <body>
 
     <div class="reg">
-        <a href="">Registration</a>
+        <a href="{{route('register')}}">Registration</a>
     </div>
     <form action="{{route('login')}}" method="post">
 

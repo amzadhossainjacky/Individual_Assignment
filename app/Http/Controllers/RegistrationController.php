@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Validator;
-class LoginController extends Controller
+
+class RegistrationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('login.index');
-
+        return view('reg.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class LoginController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -38,49 +38,31 @@ class LoginController extends Controller
     {
         //validation
         $validation = Validator::make($request->all(), [
-			'email'=>'required',
-			'password'=>'required'
+
+			'name'=>'required',
+			'email'=>'required|email|unique:users',
+			'password'=>'required',
+			'company'=>'required'
         ]);
 
         if($validation->fails()){
 			return back()
 					->with('errors', $validation->errors())
 					->withInput();
-		}
+        }
 
-        //database finding
-        $find = User::where('email', $request->email)
-                ->where('password', $request->password)
-                ->first();
+        $user = new User();
 
-         if($find != null){
+        $user->name =$request->name;
+        $user->email =$request->email;
+        $user->password =$request->password;
+        $user->company =$request->company;
+        $user->role ="manager";
+        $user->validated = 0;
+        $user->save();
 
-            if($find->role == "admin"){
+        return redirect()->route('login');
 
-                $request->session()->put('uname', $find->name);
-                $request->session()->put('uemail', $find->email);
-                $request->session()->put('uid', $find->id);
-
-                return redirect()->route('admin_home');
-            }
-
-            if($find->role == "manager" && $find->validated == 1){
-                $request->session()->put('uname', $find->name);
-                $request->session()->put('uemail', $find->email);
-                $request->session()->put('uid', $find->id);
-
-                return redirect()->route('manager_home');
-            }
-
-            else{
-                $request->session()->flash('msg', 'invalid username/password');
-                return redirect()->route('login');
-            }
-
-    	}else{
-            $request->session()->flash('msg', 'invalid username/password');
-            return redirect()->route('login');
-    	}
     }
 
     /**
@@ -89,11 +71,9 @@ class LoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function dataStore(Request $request)
+    public function show($id)
     {
-
-
-
+        //
     }
 
     /**
