@@ -27,5 +27,8 @@ Route::post('/system/register', 'RegistrationController@store')->name('register'
 
 
 Route::get('/system/admin/home', 'AdminHomeController@index')->name('admin_home');
+Route::get('/system/busmanager/{id}/delete', 'AdminHomeController@destroy')->name('destroy_manager');
+
+
 Route::get('/system/supportstaff/home', 'ManagerHomeController@index')->name('manager_home');
 

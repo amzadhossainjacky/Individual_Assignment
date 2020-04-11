@@ -32,9 +32,9 @@
 			<td>{{$user['email']}}</td>
 			<td>{{$user['company']}}</td>
 			<td>
-                {{-- <form action="{{route('destroy', $user['id'])}}" method="get">
+                <form action="{{route('destroy_manager', $user['id'])}}" method="get">
                     <button type="submit"> Delete</button>
-                </form> --}}
+                </form>
                 {{-- <a href="{{route('ind', $user['id'])}}">Details</a> --}}
 
                 {{-- <a href="{{route('home.edit', $user['userId'])}}">Edit</a>

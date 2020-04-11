@@ -89,5 +89,8 @@ class AdminHomeController extends Controller
     public function destroy($id)
     {
         //
+
+        $delete = User::destroy($id);
+        return redirect()->back();
     }
 }
